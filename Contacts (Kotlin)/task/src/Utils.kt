@@ -13,3 +13,28 @@ fun phoneNumberChecker(phoneNumber: String): String {
         "[no number]"
     }
 }
+
+fun genericParser(string: String, error: String): String {
+    if (error == "Bad gender") {
+        return genderParse(string)
+    }
+
+    if (error == "Wrong number format!") {
+        return phoneNumberChecker(string)
+    }
+
+    if (string.isEmpty()) {
+        println(error)
+        return "[no data]"
+    }
+    return string
+}
+
+
+fun genderParse(gender: String): String {
+    if (gender != "M" && gender != "F") {
+        println("Bad gender!")
+        return "[no data]"
+    }
+    return gender
+}

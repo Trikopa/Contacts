@@ -215,6 +215,152 @@ files:
     \      catch (Exception ex) {\n            return new CheckResult(false, \"Can't\
     \ check the answer\");\n        }\n    }\n}\n"
   learner_created: false
+- name: src/Person.kt
+  visible: true
+  text: |
+    package contacts
+
+    data class Person(val name: String, val surname: String, val number: String) {
+        override fun toString(): String {
+            return "$name $surname, $number"
+        }
+    }
+  learner_created: true
+- name: src/Utils.kt
+  visible: true
+  text: |-
+    package contacts
+
+    fun phoneNumberChecker(phoneNumber: String): String {
+        val regex = Regex("\\+?\\d*\\s*(\\(\\w{1,3}\\))\\s*(\\w+)?[-\\s](\\w{2,})?[-\\s](\\w{2,})?|" +
+                "\\+?\\d*\\s*(\\w{1,3})\\s*(\\w+)?[-\\s](\\w{2,})?[-\\s](\\w{2,})?|\\w{1,3}[\\s-]*(\\w{1,3})" +
+                "|(\\(\\w{1,3}\\))" + "|(\\(\\w{1,3}\\))[\\s-]*(\\w{1,3})" + "|(\\w{1,3})[\\s-]*(\\(\\w{1,3}\\))" +
+                "|(\\w{1,3})[\\s-]*(\\(\\w{1,3}\\))[\\s-]*(\\w{1,3})" + "|\\+?(\\(\\w+\\))" + "|\\d" + "|\\+?\\d+[\\s-]*(\\w+)")
+
+        return if (regex.matches(phoneNumber)) {
+            phoneNumber
+        } else {
+            println("Wrong number format!")
+            "[no number]"
+        }
+    }
+  learner_created: true
+- name: src/PhoneBook.kt
+  visible: true
+  text: |
+    package contacts
+
+
+    fun ask(message: String): String {
+        print(message)
+        return readln()
+    }
+
+    data class PhoneBook(val personList: MutableList<Person> = mutableListOf()) {
+
+        fun action() {
+            while (true) {
+                when (ask("Enter action (add, remove, edit, count, list, exit): ")) {
+                    "add" -> add()
+                    "remove" -> remove()
+                    "edit" -> edit()
+                    "count" -> count()
+                    "list" -> list()
+                    "exit" -> break
+                }
+            }
+        }
+
+        private fun add() {
+            val name = ask("Enter the name:")
+            val surname = ask("Enter the surname:")
+            val number = phoneNumberChecker( ask("Enter the number:"))
+            personList.add(Person(name, surname, number)).also { println("The record added.") }
+        }
+
+        private fun edit() {
+            if (personList.isEmpty()) {
+                println("No records to edit!")
+                return
+            }
+            list()
+            val record = ask("Select a record:").toInt() - 1
+            when(ask("Select a field (name, surname, number): ")) {
+                "name" -> personList[record] = personList[record].copy(name = ask("Enter name: ")).also { println("The record updated!") }
+                "surname" -> personList[record] = personList[record].copy(surname = ask("Enter surname: ")).also { println("The record updated!") }
+                "number" ->  {
+                    val number = ask("Enter number: ")
+                    personList[record] = personList[record].copy(number = phoneNumberChecker(number))
+                    println("The record updated!")
+                }
+                else -> println("Invalid")
+            }
+        }
+
+        private fun remove() {
+            if (personList.isEmpty()) {
+                println("No records to remove!")
+                return
+            }
+            list()
+            personList.removeAt(ask("Select a record:").toInt() - 1)
+            println("The record removed!")
+
+        }
+        private fun count() {
+            println("The Phone Book has ${personList.size} records.")
+        }
+        private fun list() {
+            for ((i,e) in personList.withIndex()) {
+                println("${i + 1}. $e")
+            }
+        }
+    }
+  learner_created: true
+- name: src/Organization.kt
+  visible: true
+  learner_created: true
+- name: src/Wrapper.kt
+  visible: true
+  learner_created: true
+- name: src/Actions.kt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/20390#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #11
+
+    This test should contain 4 actions: add, edit, info, exit. You should separate your actions with an empty line.
+
+    Please find below the output of your program during this failed test.
+    Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
+
+    ---
+
+    Enter action (add, remove, edit, count, info, exit): &gt; add
+    Enter the type (person, organization): &gt; organization
+    Enter the organization name: &gt; Pizza Shop
+    Enter the address: &gt; Wall St. 1
+    Enter the number:&gt; +0 (123) 456-789-9999
+    The record added.
+
+    Enter action (add, remove, edit, count, info, exit): &gt; edit
+    1. Pizza Shop
+    Select a record:&gt; 1
+    Select a field (address, number): &gt; address
+    Enter the address: &gt; Wall St 2
+
+    Enter action (add, remove, edit, count, info, exit): &gt; info
+    1. Pizza Shop
+    Enter index to show info: &gt; 1
+    Organization name: Pizza Shop
+    Address: Wall St 2
+    Number: +0 (123) 456-789-9999
+    Time created: 2023-05-16T21:28:25.295861700
+    Time last edit: 2023-05-16T21:28:25.302861500
+
+    Enter action (add, remove, edit, count, info, exit): &gt; exit
+  time: "Tue, 16 May 2023 19:28:25 UTC"
 record: -1

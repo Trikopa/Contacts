@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/740966/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: "Sun, 14 May 2023 09:55:18 UTC"
+update_date: "Tue, 16 May 2023 17:24:11 UTC"
 stages:
 - id: 1321
   step: 20388
@@ -114,6 +114,14 @@ topics:
     theory_id: 20084
   - title: Data structures
     theory_id: 16927
+  - title: Pseudocode
+    theory_id: 15090
+  - title: Pseudocode basics
+    theory_id: 19510
+  - title: Complex constructions in pseudocode
+    theory_id: 20922
+  - title: Stack
+    theory_id: 5252
   - title: Errors in programs
     theory_id: 11559
   - title: Nullable and non-nullable types
@@ -142,18 +150,10 @@ topics:
     theory_id: 11477
   - title: For loop and arrays
     theory_id: 4657
-  - title: Pseudocode
-    theory_id: 15090
-  - title: Pseudocode basics
-    theory_id: 19510
-  - title: Complex constructions in pseudocode
-    theory_id: 20922
   - title: Getting substrings
     theory_id: 8535
   - title: Processing strings
     theory_id: 9027
-  - title: Stack
-    theory_id: 5252
   - title: Call stack
     theory_id: 11550
   - title: Scopes
