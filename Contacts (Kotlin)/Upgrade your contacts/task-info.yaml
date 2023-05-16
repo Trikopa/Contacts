@@ -327,40 +327,8 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/20390#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Wrong answer in test #11
-
-    This test should contain 4 actions: add, edit, info, exit. You should separate your actions with an empty line.
-
-    Please find below the output of your program during this failed test.
-    Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
-
-    ---
-
-    Enter action (add, remove, edit, count, info, exit): &gt; add
-    Enter the type (person, organization): &gt; organization
-    Enter the organization name: &gt; Pizza Shop
-    Enter the address: &gt; Wall St. 1
-    Enter the number:&gt; +0 (123) 456-789-9999
-    The record added.
-
-    Enter action (add, remove, edit, count, info, exit): &gt; edit
-    1. Pizza Shop
-    Select a record:&gt; 1
-    Select a field (address, number): &gt; address
-    Enter the address: &gt; Wall St 2
-
-    Enter action (add, remove, edit, count, info, exit): &gt; info
-    1. Pizza Shop
-    Enter index to show info: &gt; 1
-    Organization name: Pizza Shop
-    Address: Wall St 2
-    Number: +0 (123) 456-789-9999
-    Time created: 2023-05-16T21:28:25.295861700
-    Time last edit: 2023-05-16T21:28:25.302861500
-
-    Enter action (add, remove, edit, count, info, exit): &gt; exit
-  time: "Tue, 16 May 2023 19:28:25 UTC"
+  message: Congratulations!
+  time: "Tue, 16 May 2023 19:37:12 UTC"
 record: -1

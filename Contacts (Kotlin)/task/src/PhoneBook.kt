@@ -68,8 +68,10 @@ class PhoneBook: Actions {
                 timeLastEdited = LocalDateTime.now().toString() )
             "address" -> listOfAll[record] = clone.copy(address = ask("Enter the address: "),
                 timeLastEdited = LocalDateTime.now().toString())
+                .also { println("The record updated!") }
             "number" -> listOfAll[record] = clone.copy(phoneNumber = phoneNumberChecker(ask("Enter the number: ")),
                 timeLastEdited = LocalDateTime.now().toString())
+                .also { println("The record updated!") }
         }
 
     }
