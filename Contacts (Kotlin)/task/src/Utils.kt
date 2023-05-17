@@ -1,5 +1,8 @@
 package contacts
 
+import kotlinx.serialization.json.Json
+import java.io.File
+
 fun phoneNumberChecker(phoneNumber: String): String {
     val regex = Regex("\\+?\\d*\\s*(\\(\\w{1,3}\\))\\s*(\\w+)?[-\\s](\\w{2,})?[-\\s](\\w{2,})?|" +
             "\\+?\\d*\\s*(\\w{1,3})\\s*(\\w+)?[-\\s](\\w{2,})?[-\\s](\\w{2,})?|\\w{1,3}[\\s-]*(\\w{1,3})" +
@@ -37,4 +40,48 @@ fun genderParse(gender: String): String {
         return "[no data]"
     }
     return gender
+}
+
+
+fun ask(message: String): String {
+    print(message)
+    return readln()
+}
+
+fun multipleAsk(messages: List<String>, errorMessages: List<String> = listOf()): List<String> {
+    val newData = mutableListOf<String>()
+    for (i in messages.indices) {
+        print(messages[i])
+        newData.add(genericParser(readln(), errorMessages[i]))
+    }
+    return newData
+}
+
+
+fun searchRecords(records: List<Wrapper>, query: String): MutableSet<Int> {
+    val indexesOfResults = mutableSetOf<Int>()
+    for ((i, e) in records.withIndex()) {
+        for (j in e.searchForm()) {
+            if (j.lowercase().contains(query.lowercase())) {
+                indexesOfResults.add(i)
+            }
+        }
+    }
+    return indexesOfResults
+}
+
+
+
+fun getFileFromArg(fileName: String): MutableList<Wrapper> {
+    try {
+        val file = File(fileName)
+        return if (file.exists()) {
+            Json.decodeFromString<MutableList<Wrapper>>(file.readText())
+        } else {
+            mutableListOf()
+        }
+    } catch (e: Exception) {
+        println("Error occurred while accessing file '$fileName': ${e.message}")
+    }
+    return mutableListOf()
 }

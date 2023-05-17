@@ -1,13 +1,15 @@
 package contacts
 
-import java.time.LocalDateTime
+import kotlinx.serialization.Serializable
 
-abstract class Wrapper {
-    abstract val isPerson: Boolean
-    abstract val timeCreated: String
-    abstract val timeLastEdited: String
+@Serializable
+sealed interface Wrapper {
+    val timeCreated: String
+    val timeLastEdited: String
+    fun edit()
 
+    fun searchForm(): List<String>
 
-    abstract fun infoForm()
+    fun infoForm()
 }
 
